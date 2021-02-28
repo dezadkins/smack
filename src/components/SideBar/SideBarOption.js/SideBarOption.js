@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { db } from "../../../firebase";
 
 function SideBarOption({ Icon, title, addChannelOption }) {
+  //   console.log(channels);
   const addChannel = () => {
     const channelName = prompt("Please enter the channel name");
 

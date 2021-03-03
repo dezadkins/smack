@@ -15,7 +15,7 @@ function Chat() {
     roomId && db.collection("rooms").doc(roomId)
   );
 
-  const [roomMessage] = useCollection(
+  const [roomMessages] = useCollection(
     roomId &&
       db
         .collection("rooms")
@@ -23,6 +23,9 @@ function Chat() {
         .collection("messages")
         .orderBy("timestamp", "asc")
   );
+
+  console.log(roomDetails?.data());
+  console.log(roomMessages);
 
   return (
     <ChatContainer>
@@ -41,10 +44,7 @@ function Chat() {
           </HeaderRight>
         </Header>
         <ChatMessages>{/* List out the ChatMessages */}</ChatMessages>
-        <ChatInput
-          //Channel Name
-          channelId={roomId}
-        />
+        <ChatInput channelName={roomDetails?.data().name} channelId={roomId} />
       </>
     </ChatContainer>
   );

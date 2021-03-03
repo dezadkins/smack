@@ -21,7 +21,7 @@ function ChatInput({ channelName, channelId }) {
       timestamp: firebase.firestore.FieldValue.serverTimestamp(),
       user: "Dez Adkins",
       userImage:
-        "https://www.instagram.com/p/B5Am9m4BKCa-qEsZJUqZqX2g79vVWgKjQeqAbg0/",
+        "https://www.dmarge.com/wp-content/uploads/2021/01/dwayne-the-rock-.jpg",
     });
     setInput("");
   };
@@ -33,7 +33,7 @@ function ChatInput({ channelName, channelId }) {
         <input
           value={input}
           onChange={(e) => setInput(e.target.value)}
-          placeholder={`Message #${channelName}`}
+          placeholder={`Message #${channelId}`}
         />
         <Button hidden type="submit" onClick={sendMessage}>
           SEND

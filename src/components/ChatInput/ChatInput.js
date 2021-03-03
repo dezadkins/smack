@@ -1,16 +1,40 @@
-import React from "react";
+import React, { useRef, useState } from "react";
 import styled from "styled-components";
 import { Button } from "@material-ui/core";
+import { db } from "../../firebase";
+import firebase from "firebase";
 
 function ChatInput({ channelName, channelId }) {
+  //   const inputRef = useRef(null);
+  const [input, setInput] = useState("");
+
   const sendMessage = (e) => {
     e.preventDefault(); //Prvents refresh
+
+    if (!channelId) {
+      return false;
+    }
+
+    db.collection("rooms").doc(channelId).collection("messages").add({
+      //   message: inputRef.current.value,
+      message: input,
+      timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+      user: "Dez Adkins",
+      userImage:
+        "https://www.instagram.com/p/B5Am9m4BKCa-qEsZJUqZqX2g79vVWgKjQeqAbg0/",
+    });
+    setInput("");
   };
 
   return (
     <ChatInputContainer>
       <form>
-        <input placeholder={`Message #ROOM`} />
+        {/* <input ref={inputRef} placeholder={`Message #ROOM`} /> */}
+        <input
+          value={input}
+          onChange={(e) => setInput(e.target.value)}
+          placeholder={`Message #ROOM`}
+        />
         <Button hidden type="submit" onClick={sendMessage}>
           SEND
         </Button>

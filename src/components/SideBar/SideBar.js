@@ -16,19 +16,20 @@ import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import SideBarOption from "./SideBarOption.js/SideBarOption";
 
 import { useCollection } from "react-firebase-hooks/firestore";
-import { db } from "../../firebase";
+import { auth, db } from "../../firebase";
+import { useAuthState } from "react-firebase-hooks/auth";
 
 function SideBar() {
   const [channels, loading, error] = useCollection(db.collection("rooms"));
-
+  const [user] = useAuthState(auth);
   return (
     <SidebarContainer>
       <SidebarHeader>
         <SidebarInfo>
-          <h2>NAFA HQ</h2>
+          <h2>Talk Smack HQ</h2>
           <h3>
             <FiberManualRecordIcon />
-            Dez Adkins
+            {user.displayName}
           </h3>
         </SidebarInfo>
         <CreateIcon />
@@ -72,6 +73,8 @@ const SidebarHeader = styled.div`
   display: flex;
   border-bottom: 1px solid #49274b;
   padding: 13px;
+  margin-top: 18.5px;
+  /* padding: 20px; */
 
   > .MuiSvgIcon-root {
     padding: 8px;
